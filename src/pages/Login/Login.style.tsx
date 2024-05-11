@@ -109,7 +109,5 @@ export const LoginCard = styled.div`
                 color: green;
             }
         }
-        
-
     }
 `;

@@ -1,8 +1,30 @@
 import DefaultPageContent from '../../components/DefaultPageContent';
-import { LoginCard } from './Login.style';
 import { Link } from 'react-router-dom';
 
+import { LoginCard } from './Login.style';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { LoginFormSchema } from '../../utils/ValidationSchemas';
+
+import FormErrorMessage from '../../components/FormErrorMessage';
+
+interface ILogin {
+  username: string,
+  password: string
+}
+
 const Login = () => {
+
+  const { register, handleSubmit, formState: { errors } } = useForm<ILogin>({ resolver: zodResolver(LoginFormSchema) })
+
+  /**
+   * TODO Ao configurar o redux aqui será alterado TODO 
+   */
+  const handleSave = (formData: ILogin) => {
+    console.log(formData)
+  }
+
   return (
     <DefaultPageContent>
       <LoginCard>
@@ -11,10 +33,21 @@ const Login = () => {
           <small>Guarde e acesse todas as suas senhas em apenas um lugar, de forma rápida, prática e segura!</small>
         </span>
 
-        <form>
+        <form onSubmit={handleSubmit(handleSave)}>
           <span>
-            <input type="text" placeholder='Nome de Usuário' autoFocus/>
-            <input type="password" placeholder='Senha'/>
+            <input 
+              type="text" 
+              placeholder='Nome de Usuário' 
+              { ...register('username', { required: true }) }
+              autoFocus/>
+            {<FormErrorMessage message={errors.username?.message}/>}
+
+            <input 
+              type="password" 
+              placeholder='Senha'
+              { ...register('password', { required: true }) }/>
+            {<FormErrorMessage message={errors.password?.message}/>}
+
             <a href="#RecuperarSenha">Esqueceu sua senha?</a>
 
             <input type="submit" value="Entrar" />
