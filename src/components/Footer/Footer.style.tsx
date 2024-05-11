@@ -19,8 +19,8 @@ export const FooterContainer = styled.header`
             padding: 0;
 
             & div {
-                width: 35px;
-                height: 5px;
+                width: 15px;
+                height: 3px;
                 background-color: green;
                 margin: auto;
             }
