@@ -1,7 +1,32 @@
+import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import { FooterContainer } from './Footer.style';
 
 export default function Footer(){
     return(
-        <FooterContainer>Rodapé</FooterContainer>
+        <FooterContainer>
+            
+            <div className="social" id="section-social">
+                <ul>
+                    <div></div>
+                    <li>
+                        <a href="https://www.linkedin.com/in/marcos-vinicius-angeli-costa/" target="_blank" rel="noopener noreferrer">
+                            <i><FaLinkedin /></i>
+                        </a>
+                    </li>
+                    <li>	
+                        <a href="https://contate.me/dev_marcos_vinicius" target="_blank" rel="noopener noreferrer">
+                            <i><FaWhatsapp /></i>
+                        </a>
+                    </li>
+                    <li>	
+                        <a href="https://github.com/MarcosVinicius556" target="_blank" rel="noopener noreferrer">
+                            <i><FaGithub /></i>
+                        </a>
+                    </li>
+                    <div></div>
+                </ul>
+            </div>
+            <p>Copyright by Marcos Vinicius Angeli Costa.</p>
+        </FooterContainer>
     );
 }

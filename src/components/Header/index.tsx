@@ -1,6 +1,6 @@
-import { Container, Navbar, NavbarText } from "react-bootstrap";
-import { HeaderContainer } from "./Header.style";
+import { Container, Navbar } from "react-bootstrap";
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
+import { HeaderContainer } from "./Header.style";
 
 export default function Header() {
     return(
