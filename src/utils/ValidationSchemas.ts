@@ -17,15 +17,15 @@ export const LoginFormSchema = z.object({
  */
 export const RegisterFormSchema = z.object({
     username: z.string()
-               .min(0, "Informe o nome de usuário.")
+               .min(1, "Informe o nome de usuário.")
                .max(32, "O nome de usuário não deve ser maior que 32 caractéres."),
     nickname: z.string()
-               .min(0, "Informe o seu apelido.")
-               .max(32, "O apelido não deve ser maior que 64 caractéres."),
+               .min(1, "Informe o seu apelido.")
+               .max(64, "O apelido não deve ser maior que 64 caractéres."),
     password: z.string()
-               .min(0, "Informe a senha.")
-               .max(32, "A senha não deve ser maior que 512 caractéres."),
+               .min(1, "Informe a senha.")
+               .max(512, "A senha não deve ser maior que 512 caractéres."),
     re_password: z.string()
-               .min(0, "Confirme a sua senha.")
+               .min(1, "Confirme a sua senha.")
                .max(512, "A senha não deve ser maior que 512 caractéres."),
 });
