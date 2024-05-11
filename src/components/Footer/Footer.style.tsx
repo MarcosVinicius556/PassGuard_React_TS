@@ -6,7 +6,7 @@ export const FooterContainer = styled.header`
     flex-flow: column;
     align-items: center;
     padding: 70px;
-    background: #202020;
+    background: #343a40;
 
     & div {
         display: flex;
@@ -37,7 +37,7 @@ export const FooterContainer = styled.header`
                     width: 100%;
                     height: 100%;
                     display: flex !important;
-                    background: #2a2a2a;
+                    background: #3f474e;
                     justify-content: center;
                     align-items: center;
                     color: #fff;
