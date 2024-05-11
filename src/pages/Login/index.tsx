@@ -1,5 +1,6 @@
 import DefaultPageContent from '../../components/DefaultPageContent';
 import { LoginCard } from './Login.style';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
@@ -21,7 +22,7 @@ const Login = () => {
         </form>
 
         <h6>
-          <p>Ainda não possui uma conta? <a href='#Registre-se'>Registre-se</a></p>
+          <p>Ainda não possui uma conta? <Link to='/register'>Registre-se</Link></p>
         </h6>
 
       </LoginCard>
