@@ -3,6 +3,9 @@ import RouteConfig from './routes/RouteConfig';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
+import { Provider } from 'react-redux';
+import passguardStore from './redux/Store';
+
 //Styles
 import { BodyContent, MainSection } from './styles/Global';
 
@@ -14,7 +17,9 @@ function App() {
         <Header />
         <MainSection>
           <BrowserRouter>
-            <RouteConfig />
+            <Provider store={passguardStore}>
+              <RouteConfig />
+            </Provider>
           </BrowserRouter>
         </MainSection>
         <Footer />
