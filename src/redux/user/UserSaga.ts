@@ -1,4 +1,4 @@
-import { put } from 'redux-saga/effects';
+import { put, call, Effect } from 'redux-saga/effects';
 import { IUSer } from '../../interfaces/User';
 
 import { IPassword } from '../../interfaces/Password';
@@ -18,16 +18,25 @@ import {
     updateUserDataSuccess
 } from './UserActions';
 
-export function* signInUserSaga(action: any){
+import PassGuardService from '../../service/PassGuardService';
 
-    console.log(action);
-
-    let credentials: ITokenDTO = {
-        token: 'TOKEN TESTE',
-        expires_at: 'Daqui um tempo....',
-    }
+export function* signInUserSaga(action: any): Generator<Effect, void, unknown> {
     try {
-        yield put(signInUserSuccess({ credentials }))
+        let user = {
+            username: action.payload.username,
+            pass: action.payload.password
+        }
+
+        var response: any = yield call(PassGuardService.post, '/auth/login', user);
+        let credentials: ITokenDTO = response.data;
+        response = yield call(PassGuardService.get, `/users/username/${user.username}`, {
+            headers: {
+                'Authorization': `Bearer ${credentials.token}`
+            }
+        });
+        let user_logged = response.data;
+
+        yield put(signInUserSuccess({ user: user_logged, credentials }))
     } catch(error: any) {
         yield put(signInUserFailure({ error_message: error.message }))
     }

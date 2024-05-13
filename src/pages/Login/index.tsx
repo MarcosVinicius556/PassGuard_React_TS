@@ -8,6 +8,9 @@ import { useForm } from 'react-hook-form';
 import { LoginFormSchema } from '../../utils/ValidationSchemas';
 
 import FormErrorMessage from '../../components/FormErrorMessage';
+ 
+import { useDispatch } from 'react-redux';
+import { signInUser } from '../../redux/user/UserActions';
 
 interface ILogin {
   username: string,
@@ -18,10 +21,13 @@ const Login = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm<ILogin>({ resolver: zodResolver(LoginFormSchema) })
 
+    const dispatch = useDispatch();
+
   /**
    * TODO Ao configurar o redux aqui será alterado TODO 
    */
-  const handleSave = (formData: ILogin) => {
+  const handleLogin = (formData: ILogin) => {
+    dispatch(signInUser(formData));
     console.log(formData)
   }
 
@@ -33,7 +39,7 @@ const Login = () => {
           <small>Guarde e acesse todas as suas senhas em apenas um lugar, de forma rápida, prática e segura!</small>
         </span>
 
-        <form onSubmit={handleSubmit(handleSave)}>
+        <form onSubmit={handleSubmit(handleLogin)}>
           <span>
             <input 
               type="text" 

@@ -5,6 +5,8 @@ import { IUserTypes } from "./UserActionTypes";
 
 export interface IUserState {
     user_logged: IUSer;
+    credentials: ITokenDTO | undefined;
+    loading: boolean;
 }
 
 /**
@@ -27,6 +29,7 @@ export interface SignInUserSuccess {
 }
 
 export interface SignInUserSuccessPayload {
+    user: IUSer;
     credentials: ITokenDTO;
 }
 

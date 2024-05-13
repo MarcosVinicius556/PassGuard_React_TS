@@ -17,7 +17,7 @@ import {
 import { IPasswordTypes } from './password/PasswordActionTypes';
 
 export default function* rootSaga(): any {
-    return all([
+    return yield all([
         takeLatest(IUserTypes.SIGN_IN_USER, signInUserSaga),
         takeLatest(IUserTypes.SIGN_UP_USER, signUpUserSaga),
         takeLatest(IUserTypes.UPDATE_USER_DATA, updateUserDataSaga),
