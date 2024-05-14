@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const UnauthorizedCard = styled.div`
     width: 100%;
     height: 100%;
+    max-width: 800px;
     display: flex;
     justify-content: center;
     align-items: center;
