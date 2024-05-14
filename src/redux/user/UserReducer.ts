@@ -2,16 +2,17 @@ import { toast } from "react-toastify";
 import { putDataInStorage } from "../../service/StorageService";
 import { IUserTypes } from "./UserActionTypes";
 import { IUserState, UserActions } from "./UserTypes";
+import { CREDENTIALS_ITEM_NAME, USER_ITEM_NAME } from "../../utils/StorageItemNames";
 
 const INITIAL_USER_STATE: IUserState = {
     user_logged: {
         id: null,
         username: null,
         nickname: null,
-        password: null,
         saved_passwords: []    
     },
     credentials: undefined,
+    is_logged: false,
     loading: false
     
 }
@@ -26,14 +27,14 @@ const userReducer = (state: IUserState = INITIAL_USER_STATE, action: UserActions
         case IUserTypes.SIGN_IN_USER_SUCCESS:
             let user = action.payload.user;
             let credentials = action.payload.credentials;
-
-            putDataInStorage('user_information/user', user);
-            putDataInStorage('user_information/credentials', credentials);
+            putDataInStorage(USER_ITEM_NAME, user);
+            putDataInStorage(CREDENTIALS_ITEM_NAME, credentials);
             
             return {
                 ...state,
                 loading: false,
                 user_logged: user,
+                is_logged: true,
                 credentials: credentials
         }
         case IUserTypes.SIGN_IN_USER_FAILURE:

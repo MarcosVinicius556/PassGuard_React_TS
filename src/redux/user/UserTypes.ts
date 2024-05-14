@@ -1,11 +1,12 @@
 import { IPassword } from "../../interfaces/Password";
 import { ITokenDTO } from "../../interfaces/TokenDTO";
-import { IUSer } from "../../interfaces/User";
+import { IUser } from "../../interfaces/User";
 import { IUserTypes } from "./UserActionTypes";
 
 export interface IUserState {
-    user_logged: IUSer;
+    user_logged: IUser;
     credentials: ITokenDTO | undefined;
+    is_logged: boolean;
     loading: boolean;
 }
 
@@ -29,7 +30,7 @@ export interface SignInUserSuccess {
 }
 
 export interface SignInUserSuccessPayload {
-    user: IUSer;
+    user: IUser;
     credentials: ITokenDTO;
 }
 
@@ -97,7 +98,7 @@ export interface UpdateUserDataSuccess {
 }
 
 export interface UpdateUserDataSuccessPayload {
-    newUser: IUSer;
+    newUser: IUser;
 }
 
 export interface UpdateUserDataFailure {
@@ -128,7 +129,7 @@ export interface LoadUserByUsernameSuccess {
 }
 
 export interface LoadUserByUsernameSuccessPayload {
-    requestedUser: IUSer;
+    requestedUser: IUser;
 }
 
 export interface LoadUserByUsernameFailure {
@@ -160,7 +161,7 @@ export interface LoadUserByUsernameAndPasswordSuccess {
 }
 
 export interface LoadUserByUsernameAndPasswordSuccessPayload {
-    requestedUser: IUSer;
+    requestedUser: IUser;
 }
 
 export interface LoadUserByUsernameAndPasswordFailure {
@@ -182,7 +183,7 @@ export interface LoadUserSavedPasswords {
 }
 
 export interface LoadUserSavedPasswordsPayload {
-    userId: number
+    userId: number | null
 }
 
 export interface LoadUserSavedPasswordsSuccess {

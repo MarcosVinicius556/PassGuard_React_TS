@@ -1,6 +1,6 @@
 import { encryptData, decryptData } from "./CryptService";
 
-const STORAGE_ITEMS_PREFIX = '@passguard_application/';
+import { STORAGE_ITEMS_PREFIX } from "../utils/StorageItemNames";
 
 export const putDataInStorage = (itemName: string, objectToStorage: any) => {
     let objectString = encryptData(JSON.stringify(objectToStorage));

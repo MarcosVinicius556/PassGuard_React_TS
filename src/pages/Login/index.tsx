@@ -1,5 +1,6 @@
 import DefaultPageContent from '../../components/DefaultPageContent';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import { LoginCard } from './Login.style';
 
@@ -9,8 +10,12 @@ import { LoginFormSchema } from '../../utils/ValidationSchemas';
 
 import FormErrorMessage from '../../components/FormErrorMessage';
  
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { signInUser } from '../../redux/user/UserActions';
+
+import { getLoggedSelector } from '../../redux/user/UserSelector';
+
+import { useNavigate } from 'react-router-dom';
 
 interface ILogin {
   username: string,
@@ -21,16 +26,22 @@ const Login = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm<ILogin>({ resolver: zodResolver(LoginFormSchema) })
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  /**
-   * TODO Ao configurar o redux aqui será alterado TODO 
-   */
+  const navigate = useNavigate();
+
+  const isLogged: boolean = useSelector(getLoggedSelector);
+
   const handleLogin = (formData: ILogin) => {
     dispatch(signInUser(formData));
-    console.log(formData)
   }
 
+  useEffect(() => {
+    if(isLogged) {
+      navigate('/home');
+    }
+  }, [isLogged])
+ 
   return (
     <DefaultPageContent>
       <LoginCard>

@@ -1,5 +1,5 @@
 import { put, call, Effect } from 'redux-saga/effects';
-import { IUSer } from '../../interfaces/User';
+import { IUser } from '../../interfaces/User';
 
 import { IPassword } from '../../interfaces/Password';
 import { ITokenDTO } from '../../interfaces/TokenDTO';
@@ -34,7 +34,16 @@ export function* signInUserSaga(action: any): Generator<Effect, void, unknown> {
                 'Authorization': `Bearer ${credentials.token}`
             }
         });
-        let user_logged = response.data;
+        let user_logged: IUser = {
+            id: response.data.id,
+            username: response.data.username,
+            nickname: response.data.nickName,
+            saved_passwords: response.data.savedPasswords,
+        }
+
+        console.log(response.data);
+        console.log("USER INFO");
+        console.log(user_logged);
 
         yield put(signInUserSuccess({ user: user_logged, credentials }))
     } catch(error: any) {
@@ -61,11 +70,10 @@ export function* updateUserDataSaga(action: any){
 
     console.log(action);
 
-    let newUser: IUSer = {
+    let newUser: IUser = {
         id: 1,
         username: 'Teste',
         nickname: 'teste',
-        password: 'teste',
         saved_passwords: []
     }
     try {
@@ -79,11 +87,10 @@ export function* loadUserByUsernameSaga(action: any){
 
     console.log(action);
 
-    let requestedUser: IUSer = {
+    let requestedUser: IUser = {
         id: 1,
         username: 'Teste',
         nickname: 'teste',
-        password: 'teste',
         saved_passwords: []
     }
     try {
@@ -97,11 +104,10 @@ export function* loadUserByUsernameAndPasswordSaga(action: any){
 
     console.log(action);
 
-    let requestedUser: IUSer = {
+    let requestedUser: IUser = {
         id: 1,
         username: 'Teste',
         nickname: 'teste',
-        password: 'teste',
         saved_passwords: []
     }
     try {
