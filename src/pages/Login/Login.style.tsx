@@ -83,7 +83,6 @@ export const LoginCard = styled.div`
             padding-left: 30px;
             outline: none;
             margin-top: 1.5em;
-            transition: all .4s ease-in-out;
             background: #343434;
             color: #fff;
             font-size: 18px;
