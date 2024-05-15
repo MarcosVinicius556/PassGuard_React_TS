@@ -4,7 +4,7 @@ import { memo } from 'react';
 
 const Footer = memo(() =>  {
     return(
-            <FooterContainer>
+            <FooterContainer className='bg-dark'>
                 <div className="social" id="section-social">
                     <ul>
                         <div></div>

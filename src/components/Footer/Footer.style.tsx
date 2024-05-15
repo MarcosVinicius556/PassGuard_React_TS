@@ -6,7 +6,7 @@ export const FooterContainer = styled.header`
     flex-flow: column;
     align-items: center;
     padding: 70px;
-    background: #343a40;
+    /* background: #343a40; */
 
     & div {
         display: flex;

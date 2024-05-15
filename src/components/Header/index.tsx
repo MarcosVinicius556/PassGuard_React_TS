@@ -9,8 +9,8 @@ import { ImExit } from "react-icons/im";
 const Header = memo(() =>  {
     return(
             <HeaderContainer>
-                <Navbar bg="dark" data-bs-theme="dark">
-                    <Container>
+                <Navbar bg="dark" data-bs-theme="dark" variant="dark">
+                    <Container fluid>
                         <Navbar.Brand as={Link} to="/home">
                             <AiOutlineSafetyCertificate size={35} color="green"/> {' '} PassGuard
                         </Navbar.Brand>

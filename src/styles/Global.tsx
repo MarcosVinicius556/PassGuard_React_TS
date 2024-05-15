@@ -21,11 +21,13 @@ export const BodyContent = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     flex-direction: column;
 `;
 
 export const MainSection = styled.section`
     flex: 1;
     width: 100%;
+    height: 100%;
+    overflow: auto;
 `;
