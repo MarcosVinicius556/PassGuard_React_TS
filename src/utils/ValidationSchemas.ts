@@ -29,3 +29,4 @@ export const RegisterFormSchema = z.object({
                .min(1, "Confirme a sua senha.")
                .max(512, "A senha não deve ser maior que 512 caractéres."),
 });
+
