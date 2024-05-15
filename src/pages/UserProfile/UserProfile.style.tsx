@@ -100,7 +100,6 @@ export const UserProfileContainer = styled.div`
             align-items: center;
             margin-top: 1em;
             border-radius: 25px;
-            border: 1px solid #343434;
             padding: 10px;
             background: #fa6666;
             color: #fff;

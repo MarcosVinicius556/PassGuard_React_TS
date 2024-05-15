@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { putDataInStorage } from "../../service/StorageService";
+import { putDataInStorage, removeDataFromStorage } from "../../service/StorageService";
 import { IUserTypes } from "./UserActionTypes";
 import { IUserState, UserActions } from "./UserTypes";
 import { CREDENTIALS_ITEM_NAME, USER_ITEM_NAME } from "../../utils/StorageItemNames";
@@ -104,26 +104,6 @@ const userReducer = (state: IUserState = INITIAL_USER_STATE, action: UserActions
                 ...state,
                 loading: false
         }
-        case IUserTypes.LOAD_USER_BY_USERNAME_AND_PASSWORD:
-            console.log('Chegou aqui!');
-
-            return {
-                ...state,
-        }
-        case IUserTypes.LOAD_USER_BY_USERNAME_AND_PASSWORD_SUCCESS:
-            console.log('Chegou aqui!');
-
-            return {
-                ...state,
-        }
-        case IUserTypes.LOAD_USER_BY_USERNAME_AND_PASSWORD_FAILURE:
-            console.log('Chegou aqui!');
-            toast.error(action.payload.error_message);
-
-            return {
-                ...state,
-                loading: false
-        }
         case IUserTypes.LOAD_USER_SAVED_PASSWORDS:
             console.log('Chegou aqui!');
 
@@ -143,6 +123,14 @@ const userReducer = (state: IUserState = INITIAL_USER_STATE, action: UserActions
             return {
                 ...state,
                 loading: false
+        }
+        case IUserTypes.LOGGOUT:
+
+        removeDataFromStorage(USER_ITEM_NAME);
+        removeDataFromStorage(CREDENTIALS_ITEM_NAME);
+
+            return {
+                state: INITIAL_USER_STATE,
         }
         default:
             return state;

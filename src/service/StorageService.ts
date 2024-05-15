@@ -12,3 +12,7 @@ export const getDataInStorage = (itemName: string) => {
     let storageItem = localStorage.getItem(STORAGE_ITEMS_PREFIX + itemName);
     return JSON.parse(decryptData(storageItem));
 }
+
+export const removeDataFromStorage = (itemName: string) => {
+    localStorage.removeItem(STORAGE_ITEMS_PREFIX + itemName);
+}

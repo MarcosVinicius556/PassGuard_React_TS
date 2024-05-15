@@ -15,13 +15,13 @@ function App() {
     <>
       <BodyContent>
           <BrowserRouter>
-            <Header />
-            <MainSection>
-                <Provider store={passguardStore}>
-                  <RouteConfig />
-                </Provider>
-            </MainSection>
-            <Footer />
+            <Provider store={passguardStore}>
+              <Header />
+              <MainSection>
+                    <RouteConfig />
+              </MainSection>
+              <Footer />
+            </Provider>
           </BrowserRouter>
       </BodyContent>
     </>

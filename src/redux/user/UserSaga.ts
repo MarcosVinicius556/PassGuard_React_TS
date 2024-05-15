@@ -1,11 +1,9 @@
-import { put, call, Effect } from 'redux-saga/effects';
+import { call, Effect, put } from 'redux-saga/effects';
 import { IUser } from '../../interfaces/User';
 
 import { IPassword } from '../../interfaces/Password';
 import { ITokenDTO } from '../../interfaces/TokenDTO';
 import {
-    loadUserByUsernameAndPasswordFailure,
-    loadUserByUsernameAndPasswordSuccess,
     loadUserByUsernameFailure,
     loadUserByUsernameSuccess,
     loadUserSavedPasswordsFailure,
@@ -97,23 +95,6 @@ export function* loadUserByUsernameSaga(action: any){
         yield put(loadUserByUsernameSuccess({ requestedUser }))
     } catch(error: any) {
         yield put(loadUserByUsernameFailure({ error_message: error.message }))
-    }
-}
-
-export function* loadUserByUsernameAndPasswordSaga(action: any){
-
-    console.log(action);
-
-    let requestedUser: IUser = {
-        id: 1,
-        username: 'Teste',
-        nickname: 'teste',
-        saved_passwords: []
-    }
-    try {
-        yield put(loadUserByUsernameAndPasswordSuccess({ requestedUser }))
-    } catch(error: any) {
-        yield put(loadUserByUsernameAndPasswordFailure({ error_message: error.message }))
     }
 }
 

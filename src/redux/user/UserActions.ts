@@ -3,24 +3,21 @@ import { action } from 'typesafe-actions';
 import { IUserTypes } from './UserActionTypes';
 
 import {
-    SignInUserSuccessPayload,
-    SignInUserFailurePayload,
-    SignUpUserSuccessPayload,
-    SignUpUserFailurePayload,
-    UpdateUserDataSuccessPayload,
-    UpdateUserDataFailurePayload,
-    LoadUserByUsernameSuccessPayload,
     LoadUserByUsernameFailurePayload,
-    LoadUserByUsernameAndPasswordSuccessPayload,
-    LoadUserByUsernameAndPasswordFailurePayload,
-    LoadUserSavedPasswordsSuccessPayload,
-    LoadUserSavedPasswordsFailurePayload,
-    SignInUserPayload,
-    SignUpUserPayload,
-    UpdateUserDataPayload,
     LoadUserByUsernamePayload,
-    LoadUserByUsernameAndPasswordPayload,
-    LoadUserSavedPasswordsPayload
+    LoadUserByUsernameSuccessPayload,
+    LoadUserSavedPasswordsFailurePayload,
+    LoadUserSavedPasswordsPayload,
+    LoadUserSavedPasswordsSuccessPayload,
+    SignInUserFailurePayload,
+    SignInUserPayload,
+    SignInUserSuccessPayload,
+    SignUpUserFailurePayload,
+    SignUpUserPayload,
+    SignUpUserSuccessPayload,
+    UpdateUserDataFailurePayload,
+    UpdateUserDataPayload,
+    UpdateUserDataSuccessPayload
 } from './UserTypes';
 
 export const signInUser = (payload: SignInUserPayload) => action(IUserTypes.SIGN_IN_USER, payload);
@@ -39,10 +36,8 @@ export const loadUserByUsername = (payload: LoadUserByUsernamePayload) => action
 export const loadUserByUsernameSuccess = (payload: LoadUserByUsernameSuccessPayload) => action(IUserTypes.LOAD_USER_BY_USERNAME_SUCCESS, payload);
 export const loadUserByUsernameFailure = (payload: LoadUserByUsernameFailurePayload) => action(IUserTypes.LOAD_USER_BY_USERNAME_FAILURE, payload);
 
-export const loadUserByUsernameAndPassword = (payload: LoadUserByUsernameAndPasswordPayload) => action(IUserTypes.LOAD_USER_BY_USERNAME_AND_PASSWORD, payload);
-export const loadUserByUsernameAndPasswordSuccess = (payload: LoadUserByUsernameAndPasswordSuccessPayload) => action(IUserTypes.LOAD_USER_BY_USERNAME_AND_PASSWORD_SUCCESS, payload);
-export const loadUserByUsernameAndPasswordFailure = (payload: LoadUserByUsernameAndPasswordFailurePayload) => action(IUserTypes.LOAD_USER_BY_USERNAME_AND_PASSWORD_FAILURE, payload);
-
 export const loadUserSavedPasswords = (payload: LoadUserSavedPasswordsPayload) => action(IUserTypes.LOAD_USER_SAVED_PASSWORDS, payload);
 export const loadUserSavedPasswordsSuccess = (payload: LoadUserSavedPasswordsSuccessPayload) => action(IUserTypes.LOAD_USER_SAVED_PASSWORDS_SUCCESS, payload);
 export const loadUserSavedPasswordsFailure = (payload: LoadUserSavedPasswordsFailurePayload) => action(IUserTypes.LOAD_USER_SAVED_PASSWORDS_FAILURE, payload);
+
+export const loggout = () => action(IUserTypes.LOGGOUT);

@@ -142,38 +142,6 @@ export interface LoadUserByUsernameFailurePayload {
 }
 
 /**
- * LOAD BY USERNAME AND PASSWORD
- */
-
-export interface LoadUserByUsernameAndPassword {
-    type: typeof IUserTypes.LOAD_USER_BY_USERNAME_AND_PASSWORD;
-    payload: LoadUserByUsernameAndPassword
-}
-
-export interface LoadUserByUsernameAndPasswordPayload {
-    username: string,
-    password: string
-}
-
-export interface LoadUserByUsernameAndPasswordSuccess {
-    type: typeof IUserTypes.LOAD_USER_BY_USERNAME_AND_PASSWORD_SUCCESS;
-    payload: LoadUserByUsernameAndPasswordSuccessPayload;
-}
-
-export interface LoadUserByUsernameAndPasswordSuccessPayload {
-    requestedUser: IUser;
-}
-
-export interface LoadUserByUsernameAndPasswordFailure {
-    type: typeof IUserTypes.LOAD_USER_BY_USERNAME_AND_PASSWORD_FAILURE;
-    payload: LoadUserByUsernameAndPasswordFailurePayload;
-}
-
-export interface LoadUserByUsernameAndPasswordFailurePayload {
-    readonly error_message: string;
-}
-
-/**
  * LOAD SAVED PASSWORDS
  */
 
@@ -205,6 +173,14 @@ export interface LoadUserSavedPasswordsFailurePayload {
 }
 
 /**
+ * Loggout
+ */
+
+export interface Loggout {
+    type: typeof IUserTypes.LOGGOUT;
+}
+
+/**
  * EXPORT ALL ACTIONS AVAILABLE...
  */
 
@@ -221,9 +197,7 @@ export type UserActions =
                         | LoadUserByUsername 
                         | LoadUserByUsernameSuccess 
                         | LoadUserByUsernameFailure
-                        | LoadUserByUsernameAndPassword
-                        | LoadUserByUsernameAndPasswordSuccess
-                        | LoadUserByUsernameAndPasswordFailure
                         | LoadUserSavedPasswords
                         | LoadUserSavedPasswordsSuccess
-                        | LoadUserSavedPasswordsFailure;
+                        | LoadUserSavedPasswordsFailure
+                        | Loggout;
