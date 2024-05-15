@@ -13,6 +13,7 @@ const INITIAL_USER_STATE: IUserState = {
     },
     credentials: undefined,
     is_logged: false,
+    is_creation_done: false,
     loading: false
     
 }
@@ -45,16 +46,17 @@ const userReducer = (state: IUserState = INITIAL_USER_STATE, action: UserActions
                 loading: false
         }
         case IUserTypes.SIGN_UP_USER:
-            console.log('Chegou aqui!');
-
             return {
                 ...state,
+                loading: true
         }
         case IUserTypes.SIGN_UP_USER_SUCCESS:
-            console.log('Chegou aqui!');
-
+            toast.success('Usuário criado com sucesso, em instantes você será direcionado para a página de login!')
             return {
                 ...state,
+                user_logged: action.payload.user_created,
+                is_creation_done: true,
+                loading: false,
         }
         case IUserTypes.SIGN_UP_USER_FAILURE:
             console.log('Chegou aqui!');

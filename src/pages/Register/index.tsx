@@ -1,8 +1,7 @@
-import DefaultPageContent from '../../components/DefaultPageContent';
 import { Link } from 'react-router-dom';
+import DefaultPageContent from '../../components/DefaultPageContent';
 
 import { RegisterCard } from './Register.style';
-
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -11,6 +10,14 @@ import { RegisterFormSchema } from '../../utils/ValidationSchemas';
 
 import { toast } from 'react-toastify';
 import FormErrorMessage from '../../components/FormErrorMessage';
+
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { signUpUser } from '../../redux/user/UserActions';
+
+import { getCreationDoneSelector } from '../../redux/user/UserSelector';
+
+import { useNavigate } from 'react-router-dom';
 
 interface IRegister {
   username: string,
@@ -22,6 +29,10 @@ interface IRegister {
 const Register = () => {
 
   const{ register, handleSubmit, formState: { errors } } = useForm<IRegister>({ resolver: zodResolver(RegisterFormSchema) })
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+  const isCreationDone = useSelector(getCreationDoneSelector);
 
   const handleRegister = (data: IRegister) => {
       if(data.password !== data.re_password) {
@@ -29,8 +40,14 @@ const Register = () => {
         return;
       }
 
-      toast.success("Registrado com sucesso!");
+      dispatch(signUpUser(data));
   }
+
+  useEffect(() => {
+    if(isCreationDone) {
+      navigate('/');
+    }
+  }, [isCreationDone]);
 
   return (
     <DefaultPageContent>

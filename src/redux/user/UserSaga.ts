@@ -39,28 +39,33 @@ export function* signInUserSaga(action: any): Generator<Effect, void, unknown> {
             saved_passwords: response.data.savedPasswords,
         }
 
-        console.log(response.data);
-        console.log("USER INFO");
-        console.log(user_logged);
-
         yield put(signInUserSuccess({ user: user_logged, credentials }))
     } catch(error: any) {
-        yield put(signInUserFailure({ error_message: error.message }))
+        yield put(signInUserFailure({ error_message: error.response.data.message }))
     }
 }
 
-export function* signUpUserSaga(action: any){
+export function* signUpUserSaga(action: any): Generator<Effect, void, unknown>{
 
-    console.log(action);
-
-    let credentials: ITokenDTO = {
-        token: 'TOKEN TESTE',
-        expires_at: 'Daqui um tempo....',
-    }
     try {
-        yield put(signUpUserSuccess({ credentials }))
+        let user = {
+            username: action.payload.username,
+            nickname: action.payload.nickname,
+            pass: action.payload.password
+        }
+
+        var response: any = yield call(PassGuardService.post, '/users', user);
+        
+        let user_created: IUser = {
+            id: response.data.id,
+            username: response.data.username,
+            nickname: response.data.nickName,
+            saved_passwords: [],
+        }
+
+        yield put(signUpUserSuccess({ user_created }))
     } catch(error: any) {
-        yield put(signUpUserFailure({ error_message: error.message }))
+        yield put(signUpUserFailure({ error_message: error.response.data.message }))
     }
 }
 
@@ -77,7 +82,7 @@ export function* updateUserDataSaga(action: any){
     try {
         yield put(updateUserDataSuccess({ newUser }))
     } catch(error: any) {
-        yield put(updateUserDataFailure({ error_message: error.message }))
+        yield put(updateUserDataFailure({ error_message: error.response.data.message }))
     }
 }
 
@@ -94,7 +99,7 @@ export function* loadUserByUsernameSaga(action: any){
     try {
         yield put(loadUserByUsernameSuccess({ requestedUser }))
     } catch(error: any) {
-        yield put(loadUserByUsernameFailure({ error_message: error.message }))
+        yield put(loadUserByUsernameFailure({ error_message: error.response.data.message }))
     }
 }
 
@@ -112,6 +117,6 @@ export function* loadUserSavedPasswordsSaga(action: any){
     try {
         yield put(loadUserSavedPasswordsSuccess({ savedPasswords }))
     } catch(error: any) {
-        yield put(loadUserSavedPasswordsFailure({ error_message: error.message }))
+        yield put(loadUserSavedPasswordsFailure({ error_message: error.response.data.message }))
     }
 }

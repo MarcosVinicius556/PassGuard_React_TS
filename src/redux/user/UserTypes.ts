@@ -7,6 +7,7 @@ export interface IUserState {
     user_logged: IUser;
     credentials: ITokenDTO | undefined;
     is_logged: boolean;
+    is_creation_done: boolean;
     loading: boolean;
 }
 
@@ -65,7 +66,7 @@ export interface SignUpUserSuccess {
 }
 
 export interface SignUpUserSuccessPayload {
-    credentials: ITokenDTO;
+    user_created: IUser;
 }
 
 export interface SignUpUserFailure {

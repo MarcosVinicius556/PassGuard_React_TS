@@ -65,8 +65,6 @@ const Login = () => {
               { ...register('password', { required: true }) }/>
             {<FormErrorMessage message={errors.password?.message}/>}
 
-            <a href="#RecuperarSenha">Esqueceu sua senha?</a>
-
             <input type="submit" value="Entrar" />
           </span>
         </form>
