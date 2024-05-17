@@ -9,6 +9,7 @@ const INITIAL_USER_STATE: IUserState = {
         id: null,
         username: null,
         nickname: null,
+        password: null,
         saved_passwords: []    
     },
     credentials: undefined,
@@ -67,13 +68,11 @@ const userReducer = (state: IUserState = INITIAL_USER_STATE, action: UserActions
                 loading: false
         }
         case IUserTypes.UPDATE_USER_DATA:
-            console.log('Chegou aqui!');
-
             return {
                 ...state,
+                loading: true,
         }
         case IUserTypes.UPDATE_USER_DATA_SUCCESS:
-            console.log('Chegou aqui!');
 
             return {
                 ...state,

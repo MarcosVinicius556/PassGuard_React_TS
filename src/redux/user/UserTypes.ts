@@ -90,6 +90,7 @@ export interface UpdateUserData {
 export interface UpdateUserDataPayload {
     username: string;
     nickname: string;
+    alterarSenha: boolean;
     password: string;
 }
 

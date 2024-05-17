@@ -36,6 +36,7 @@ export function* signInUserSaga(action: any): Generator<Effect, void, unknown> {
             id: response.data.id,
             username: response.data.username,
             nickname: response.data.nickName,
+            password: response.data.password,
             saved_passwords: response.data.savedPasswords,
         }
 
@@ -60,6 +61,7 @@ export function* signUpUserSaga(action: any): Generator<Effect, void, unknown>{
             id: response.data.id,
             username: response.data.username,
             nickname: response.data.nickName,
+            password: response.data.pass,
             saved_passwords: [],
         }
 
@@ -77,6 +79,7 @@ export function* updateUserDataSaga(action: any){
         id: 1,
         username: 'Teste',
         nickname: 'teste',
+        password: 'teste',
         saved_passwords: []
     }
     try {
@@ -87,20 +90,7 @@ export function* updateUserDataSaga(action: any){
 }
 
 export function* loadUserByUsernameSaga(action: any){
-
-    console.log(action);
-
-    let requestedUser: IUser = {
-        id: 1,
-        username: 'Teste',
-        nickname: 'teste',
-        saved_passwords: []
-    }
-    try {
-        yield put(loadUserByUsernameSuccess({ requestedUser }))
-    } catch(error: any) {
-        yield put(loadUserByUsernameFailure({ error_message: error.response.data.message }))
-    }
+    throw new Error("Função não implementada");
 }
 
 export function* loadUserSavedPasswordsSaga(action: any){

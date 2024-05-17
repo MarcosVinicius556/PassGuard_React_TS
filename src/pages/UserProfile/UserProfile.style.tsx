@@ -73,6 +73,29 @@ export const UserProfileContainer = styled.div`
                 letter-spacing: .5px;
                 color: #343434;
             }
+
+            & span {
+                width: 100%;
+                height: 50px;
+                padding: 1em;
+
+                display: flex;
+                justify-content: end;
+                align-items: center;
+
+                & input[type="checkbox"] {
+                    width: 13px;
+                    margin-right: 20px;
+
+                }
+
+                & label {
+                    width: 100%;
+                    text-align: left;
+                }
+
+
+            }
         }
 
         & input[type="submit"] {
