@@ -49,7 +49,7 @@ export const Header = styled.div`
     }
 `;
 
-export const TableContainer = styled.div`
+export const CardContainer = styled.div`
     width: 100%;
     height: auto;
     max-height: 300px;
@@ -79,86 +79,21 @@ export const TableContainer = styled.div`
         transform: scale(1.1);
     }
 
-    & table {
+    & div {
         margin: 0;
-        padding: 0;
+        padding: 1em;
         width: 100%;
-        table-layout: fixed;
-        border-collapse: collapse;
-
-        & caption {
-            font-size: 1.5em;
-            margin: .5em 0 .75em;
-        }
-
-        & tr {
-            border-bottom: 1px solid #ddd;
-            padding: .35em;
-        }
-
-        & th, td {
-            padding: .62em;
-            text-align: center;
-        }
-
-        & th {
-            font-size: .85em;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-        }
-
-        & td .action {
-            width: 30px;
-            height: 30px;
-            border: 0;
-            padding: 5px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-right: 3px;
-        }
-
-        & .action svg {
-            vertical-align: middle;
-        }
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
     }
 
     @media screen and (max-width: 600px) {
-        & table {
+        & div {
             border: 0;
 
-            & caption {
-                font-size: 1.3em;
-            }
-
-            & thead {
-                border: none;
-                height: 1px;
-                margin: -1px;
-                overflow: hidden;
-                padding: 0;
-                position: absolute;
-                width: 1px;
-            }
-
-            & tr {
-                border-bottom: 3px solid #ddd;
-                display: block;
-                margin-bottom: .60em;
-            }
-
-            & td {
-                border-bottom: 1px solid #ddd;
-                display: block;
-                font-size: .8em;
-                text-align: right;
-            }
-
-            & td::before {
-                content: attr(data-label);
-                float: left;
-                font-weight: bold;
-                text-transform: uppercase;
-            }
+           
         }
     }
 `;
