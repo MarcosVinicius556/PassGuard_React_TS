@@ -5,6 +5,8 @@ import { IUserTypes } from "./UserActionTypes";
 
 export interface IUserState {
     user_logged: IUser;
+    page_number: number;
+    page_size: number;
     credentials: ITokenDTO | undefined;
     is_logged: boolean;
     is_creation_done: boolean;
@@ -100,7 +102,7 @@ export interface UpdateUserDataSuccess {
 }
 
 export interface UpdateUserDataSuccessPayload {
-    newUser: IUser;
+    user: IUser;
 }
 
 export interface UpdateUserDataFailure {
@@ -153,7 +155,9 @@ export interface LoadUserSavedPasswords {
 }
 
 export interface LoadUserSavedPasswordsPayload {
-    userId: number | null
+    userId: number | null;
+    token: string;
+    page_number: number;
 }
 
 export interface LoadUserSavedPasswordsSuccess {
@@ -163,6 +167,8 @@ export interface LoadUserSavedPasswordsSuccess {
 
 export interface LoadUserSavedPasswordsSuccessPayload {
     savedPasswords: IPassword[];
+    page: number;
+    page_size: number;
 }
 
 export interface LoadUserSavedPasswordsFailure {

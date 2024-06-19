@@ -76,7 +76,6 @@ export const CardContainer = styled.div`
 
     .new:hover {
         background: #5fd204;
-        transform: scale(1.1);
     }
 
     & div {
@@ -96,6 +95,40 @@ export const CardContainer = styled.div`
            
         }
     }
+`;
+
+export const NextPreviousContainer = styled.span`
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 1em;
+
+    & button {
+        
+        background: #5e5e5e;
+        border: none;
+        padding: .5em;
+        border-radius: 5px;
+        color: #fff;
+        letter-spacing: 1px;
+        border: 1px solid transparent;
+        transition: all .3s ease-in-out;
+
+        &:hover {
+            background: #fff;
+            color: #323232;
+            border: 1px solid gray;
+        }
+
+        &:nth-child(1) {
+            & svg {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
 `;
 
 export const LetterAbbreviation = styled.div`

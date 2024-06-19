@@ -64,11 +64,11 @@ export const Card = styled.article`
         }
 
         & button:nth-child(1) {
-            background: #fbf198;
+            background: #a6bafd;
             transition: all .3s ease-in-out;
 
             &:hover {
-                background: #dcd492;
+                background: #7f8fc3;
                 color: #fff;
             }
         }

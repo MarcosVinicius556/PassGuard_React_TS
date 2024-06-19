@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
 import { putDataInStorage, removeDataFromStorage } from "../../service/StorageService";
+import { CREDENTIALS_ITEM_NAME, USER_ITEM_NAME } from "../../utils/StorageItemNames";
 import { IUserTypes } from "./UserActionTypes";
 import { IUserState, UserActions } from "./UserTypes";
-import { CREDENTIALS_ITEM_NAME, USER_ITEM_NAME } from "../../utils/StorageItemNames";
 
 const INITIAL_USER_STATE: IUserState = {
     user_logged: {
@@ -15,6 +15,8 @@ const INITIAL_USER_STATE: IUserState = {
     credentials: undefined,
     is_logged: false,
     is_creation_done: false,
+    page_number: 0,
+    page_size: 0,
     loading: false
     
 }
@@ -60,7 +62,6 @@ const userReducer = (state: IUserState = INITIAL_USER_STATE, action: UserActions
                 loading: false,
         }
         case IUserTypes.SIGN_UP_USER_FAILURE:
-            console.log('Chegou aqui!');
             toast.error(action.payload.error_message);
 
             return {
@@ -78,7 +79,6 @@ const userReducer = (state: IUserState = INITIAL_USER_STATE, action: UserActions
                 ...state,
         }
         case IUserTypes.UPDATE_USER_DATA_FAILURE:
-            console.log('Chegou aqui!');
             toast.error(action.payload.error_message);
 
             return {
@@ -86,19 +86,16 @@ const userReducer = (state: IUserState = INITIAL_USER_STATE, action: UserActions
                 loading: false
         }
         case IUserTypes.LOAD_USER_BY_USERNAME:
-            console.log('Chegou aqui!');
 
             return {
                 ...state,
         }
         case IUserTypes.LOAD_USER_BY_USERNAME_SUCCESS:
-            console.log('Chegou aqui!');
 
             return {
                 ...state,
         }
         case IUserTypes.LOAD_USER_BY_USERNAME_FAILURE:
-            console.log('Chegou aqui!');
             toast.error(action.payload.error_message);
 
             return {
@@ -106,19 +103,41 @@ const userReducer = (state: IUserState = INITIAL_USER_STATE, action: UserActions
                 loading: false
         }
         case IUserTypes.LOAD_USER_SAVED_PASSWORDS:
-            console.log('Chegou aqui!');
+            console.log("BUSCANDO SENHAAAAAAAAAS");
+            console.log(action.payload)
+            console.log(state)
+            console.log(action.payload.page_number > state.page_size)
+            if(action.payload.page_number > state.page_size) {
+                toast.warn("Não há mais registros para buscar!")
+                return {
+                    ...state    
+                }
+            }
+
+            if(state.page_number < 0) {
+                toast.warn("Você está na primeira página!")
+                return {
+                    ...state    
+                }
+            }
 
             return {
                 ...state,
+                loading: true,
         }
         case IUserTypes.LOAD_USER_SAVED_PASSWORDS_SUCCESS:
-            console.log('Chegou aqui!');
 
             return {
                 ...state,
+                loading: false,
+                page_number: action.payload.page,
+                page_size: action.payload.page_size,
+                user_logged: {
+                    ...state.user_logged,
+                    saved_passwords: action.payload.savedPasswords
+                }
         }
         case IUserTypes.LOAD_USER_SAVED_PASSWORDS_FAILURE:
-            console.log('Chegou aqui!');
             toast.error(action.payload.error_message);
 
             return {

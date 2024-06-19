@@ -1,11 +1,8 @@
 import { call, Effect, put } from 'redux-saga/effects';
 import { IUser } from '../../interfaces/User';
 
-import { IPassword } from '../../interfaces/Password';
 import { ITokenDTO } from '../../interfaces/TokenDTO';
 import {
-    loadUserByUsernameFailure,
-    loadUserByUsernameSuccess,
     loadUserSavedPasswordsFailure,
     loadUserSavedPasswordsSuccess,
     signInUserFailure,
@@ -71,19 +68,28 @@ export function* signUpUserSaga(action: any): Generator<Effect, void, unknown>{
     }
 }
 
-export function* updateUserDataSaga(action: any){
-
-    console.log(action);
-
-    let newUser: IUser = {
-        id: 1,
-        username: 'Teste',
-        nickname: 'teste',
-        password: 'teste',
-        saved_passwords: []
-    }
+export function* updateUserDataSaga(action: any): Generator<Effect, void, unknown> {
+    
     try {
-        yield put(updateUserDataSuccess({ newUser }))
+        let userToUpdate: IUser = {
+            id: action.payload.id,
+            username: action.payload.username,
+            nickname: action.payload.nickname,
+            password: action.payload.password,
+            saved_passwords: action.payload.saved_passwords
+        }
+
+        var response: any = yield call(PassGuardService.put, `/users/${userToUpdate.id}`, userToUpdate);
+
+        let user: IUser = {
+            id: response.data.id,
+            username: response.data.username,
+            nickname: response.data.nickName,
+            password: response.data.password,
+            saved_passwords: response.data.saved_passwords
+        }
+
+        yield put(updateUserDataSuccess({ user }))
     } catch(error: any) {
         yield put(updateUserDataFailure({ error_message: error.response.data.message }))
     }
@@ -93,20 +99,28 @@ export function* loadUserByUsernameSaga(action: any){
     throw new Error("Função não implementada");
 }
 
-export function* loadUserSavedPasswordsSaga(action: any){
+export function* loadUserSavedPasswordsSaga(action: any): Generator<Effect, void, unknown>{
 
-    console.log(action);
-
-    let savedPasswords: IPassword[] = [{
-        id: 1,
-        description: 'Teste',
-        name: 'TESTE',
-        username: 'Teste',
-        password: 'teste',
-    }]
     try {
-        yield put(loadUserSavedPasswordsSuccess({ savedPasswords }))
+        let page = action.payload.page_number ? action.payload.page_number : 0;
+    
+        var response: any = yield call(PassGuardService.get, `/passwords/byUser/${action.payload.userId}`, {
+            headers: {
+                'Authorization': `Bearer ${action.payload.token}`,
+                'Content-Type': 'application/json',
+                page: page
+            }
+        });
+        if(!response?.data) 
+            return;
+
+        let savedPasswords = response.data.content;
+        page = response.data.number;
+        let page_size = response.data.totalPages;
+
+        yield put(loadUserSavedPasswordsSuccess({ savedPasswords, page, page_size }))
     } catch(error: any) {
-        yield put(loadUserSavedPasswordsFailure({ error_message: error.response.data.message }))
+        console.log(error);
+        yield put(loadUserSavedPasswordsFailure({ error_message: error.response?.data.message }))
     }
 }
